@@ -23,23 +23,33 @@
 */
 
 float analogicalSignal;
-int digitalSignal;
+int digitalSignal, redLed = 3, greenLed = 4;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
   Serial.begin(9600);
+  pinMode(redLed, OUTPUT);
+  pinMode(greenLed, OUTPUT);
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  showAnalogicalSignal();
   showAnalogicalSignal();
 }
 
 void showDigitalSignal() {
   // Print digital signal
   digitalSignal = digitalRead(2);
+
+  if (analogicalSignal < 800) {
+    digitalWrite(redLed, HIGH);
+    digitalWrite(greenLed, LOW);
+  } else {
+    digitalWrite(greenLed, HIGH);
+    digitalWrite(redLed, LOW);
+  }
+
   Serial.println(digitalSignal);
 }
 
